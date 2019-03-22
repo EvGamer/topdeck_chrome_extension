@@ -2,19 +2,16 @@
   "manifest_version": 3,
   "name": "Topdeck Price Finder",
   "version": "0.0.0",
-  "content_scripts": [
-    {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js",
-        "fetch.js",
-        "content.js"
-      ]
-    }
-  ],
+  "background": {
+    "name": "TopDeck Cost Search",
+    "scripts": [
+      "lib/lodash.min.js",
+      "lib/fetch.js",
+      "content.js"
+    ]
+  },
   "browser_action": {
+    "default_popup": "popup.html",
     "default_icon": "icon.png"
   }
 }

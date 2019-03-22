@@ -33,20 +33,40 @@ function displayCard(card) {
   console.log(card.cost + ' р ' + card.name + ' ' + seller + ' ' + city);
 }
 
-fetch(
-  'https://topdeck.ru/apps/toptrade/singles/search?q=Plains',
-  { method: 'GET', mode: 'cors' }
-)
-  .then(function (response) {
-    console.log(response);
-    return response.text();
-  })
-  .then(function (data) {
-    console.log(data);
-    var cardList = retrieveCards(data);
-    if(!cardList.length) console.log('No cards found');
-    cardList.forEach(displayCard)
-  })
-  .catch(function(error) {
-    console.log(error);
+function main(event) {
+  var search = {
+    button: document.getElementById("confirm-search"),
+    input: document.getElementById("search"),
+    resultList: []
+  };
+
+  search.button.addEventListener('click', function() {
+    fetch(
+      'https://topdeck.ru/apps/toptrade/singles/search?q=' + encodeURIComponent(search.input.value),
+      { method: 'GET', mode: 'no-cors' }
+    )
+      .then(function (response) {
+        console.log(response);
+        return response.text();
+      })
+      .then(function (data) {
+        console.log(data);
+        var cardList = retrieveCards(data);
+        if(!cardList.length) console.log('No cards found');
+        cardList.forEach(displayCard)
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   });
+}
+
+function update(resultList) {
+  search.resultList = resultList;
+  var cardTemplate = _.template(document.getElementById("singles-template").innerHTML);
+
+}
+
+
+
+document.addEventListener('DOMContentLoaded', main)

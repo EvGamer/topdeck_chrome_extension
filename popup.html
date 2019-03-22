@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<label for="search">Search</label>
+<input type="text" id="search" name="search"/>
+<button id="confirm-search">Search</button>
+<section id="search-results">
+  <!--insert cards here-->
+</section>
+<script type="text/html" id="singles-template">
+  <div class="card">
+    <span class="cost"><%- cost %></span>
+    <span class="name"><%- name %></span>
+    <span class="owner"><%- owner %></span>
+  </div>
+</script>
+</body>
+</html>
